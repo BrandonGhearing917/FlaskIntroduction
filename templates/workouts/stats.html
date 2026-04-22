@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Workout Stats</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="content wide">
+    <h1 style="text-align:center; color:#fff; margin-bottom:20px;">Workout Stats</h1>
+
+    <!-- Summary cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2>{{ total_workouts }}</h2>
+            <p>Total Workouts</p>
+        </div>
+        <div class="stat-card">
+            <h2>{{ total_duration }}</h2>
+            <p>Total Minutes Logged</p>
+        </div>
+        <div class="stat-card">
+            <h2>{{ (total_duration / 60) | round(1) if total_duration else 0 }}</h2>
+            <p>Total Hours</p>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+        <div class="chart-container">
+            <h3>Workouts by Category</h3>
+            <canvas id="categoryChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Workouts &mdash; Last 7 Days</h3>
+            <canvas id="recentChart"></canvas>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:8px; margin-bottom:30px;">
+        <a href="/workouts/" class="btn btn-primary">&#8592; Back to Workout Log</a>
+    </div>
+</div>
+
+<script>
+const categoryLabels = {{ category_labels | safe }};
+const categoryCounts = {{ category_counts | safe }};
+const dateLabels     = {{ date_labels | safe }};
+const dateCounts     = {{ date_counts | safe }};
+
+new Chart(document.getElementById('categoryChart'), {
+    type: 'doughnut',
+    data: {
+        labels: categoryLabels.length ? categoryLabels : ['No data'],
+        datasets: [{
+            data: categoryCounts.length ? categoryCounts : [1],
+            backgroundColor: ['#3d5a80','#c0392b','#27ae60','#8e44ad','#7f8c8d'],
+        }]
+    },
+    options: {
+        plugins: { legend: { position: 'bottom' } }
+    }
+});
+
+new Chart(document.getElementById('recentChart'), {
+    type: 'bar',
+    data: {
+        labels: dateLabels.length ? dateLabels : ['No data'],
+        datasets: [{
+            label: 'Workouts',
+            data: dateCounts.length ? dateCounts : [0],
+            backgroundColor: 'rgb(105, 112, 97)',
+            borderRadius: 4,
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1 } }
+        },
+        plugins: { legend: { display: false } }
+    }
+});
+</script>
+{% endblock %}

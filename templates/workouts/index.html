@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Workout Log</title>
+{% endblock %}
+
+{% block body %}
+<div class="content wide">
+    <h1 style="text-align:center; color:#fff; margin-bottom:20px;">Workout Log</h1>
+
+    <!-- Filter / Sort bar -->
+    <div class="card filter-bar">
+        <form method="GET" action="/workouts/" style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+            <label>
+                Sort by:
+                <select name="sort" onchange="this.form.submit()">
+                    <option value="date"     {% if sort == 'date'     %}selected{% endif %}>Date</option>
+                    <option value="exercise" {% if sort == 'exercise' %}selected{% endif %}>Exercise</option>
+                    <option value="category" {% if sort == 'category' %}selected{% endif %}>Category</option>
+                    <option value="duration" {% if sort == 'duration' %}selected{% endif %}>Duration</option>
+                </select>
+            </label>
+            <label>
+                Filter by category:
+                <select name="category" onchange="this.form.submit()">
+                    <option value="">All</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat }}" {% if category_filter == cat %}selected{% endif %}>{{ cat.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            {% if category_filter %}
+            <a href="/workouts/" class="btn btn-secondary">Clear Filter</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Workout table -->
+    {% if workouts|length < 1 %}
+    <div class="card" style="text-align:center; color:#666; padding:30px;">
+        No workouts logged yet. Add one below!
+    </div>
+    {% else %}
+    <div class="card" style="overflow-x:auto; padding:0;">
+        <table>
+            <tr>
+                <th>Exercise</th>
+                <th>Category</th>
+                <th>Duration</th>
+                <th>Sets &times; Reps</th>
+                <th>Weight (lbs)</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            {% for w in workouts %}
+            <tr>
+                <td style="text-align:left; padding-left:12px;"><strong>{{ w.exercise_name }}</strong></td>
+                <td><span class="badge badge-{{ w.category }}">{{ w.category.capitalize() }}</span></td>
+                <td>{{ w.duration }} min</td>
+                <td>
+                    {% if w.sets and w.reps %}{{ w.sets }} &times; {{ w.reps }}
+                    {% elif w.sets %}{{ w.sets }} sets
+                    {% else %}&mdash;{% endif %}
+                </td>
+                <td>{{ w.weight if w.weight else '&mdash;' }}</td>
+                <td>{{ w.date_logged.strftime('%b %d, %Y') }}</td>
+                <td>
+                    <a href="/workouts/update/{{ w.id }}" class="btn btn-primary" style="margin-right:4px;">Edit</a>
+                    <a href="/workouts/delete/{{ w.id }}" class="btn btn-danger"
+                       onclick="return confirm('Delete this workout?')">Delete</a>
+                </td>
+            </tr>
+            {% if w.notes %}
+            <tr>
+                <td colspan="7" style="text-align:left; color:#777; font-size:0.85em; padding:4px 12px; background:#fafaf8;">
+                    &#128221; {{ w.notes }}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Add workout form -->
+    <div class="card">
+        <h2 style="margin-top:0; color:#333;">Log a Workout</h2>
+        <form method="POST" action="/workouts/">
+            {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="form-group" style="flex:2;">
+                    {{ form.exercise_name.label }}
+                    {{ form.exercise_name(placeholder="e.g. Bench Press") }}
+                    {% for err in form.exercise_name.errors %}
+                    <span class="form-error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group" style="flex:1;">
+                    {{ form.category.label }}
+                    {{ form.category() }}
+                </div>
+                <div class="form-group" style="flex:1;">
+                    {{ form.duration.label }}
+                    {{ form.duration(placeholder="30") }}
+                    {% for err in form.duration.errors %}
+                    <span class="form-error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.sets.label }}
+                    {{ form.sets(placeholder="3") }}
+                    {% for err in form.sets.errors %}
+                    <span class="form-error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    {{ form.reps.label }}
+                    {{ form.reps(placeholder="10") }}
+                    {% for err in form.reps.errors %}
+                    <span class="form-error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    {{ form.weight.label }}
+                    {{ form.weight(placeholder="135") }}
+                    {% for err in form.weight.errors %}
+                    <span class="form-error">{{ err }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.notes.label }}
+                {{ form.notes(placeholder="Optional notes...", rows=2) }}
+            </div>
+            <input type="submit" value="Log Workout" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+{% endblock %}

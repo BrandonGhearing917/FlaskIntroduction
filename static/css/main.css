@@ -4,11 +4,54 @@ body, html {
     background-color: rgb(105, 112, 97);
 }
 
+/* ── Navbar ── */
+.navbar {
+    background-color: rgb(50, 55, 44);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.95em;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* ── Content containers ── */
 .content {
-    margin: 0 auto;
+    margin: 30px auto;
     width: 400px;
 }
 
+.content.wide {
+    width: 920px;
+    max-width: 95vw;
+}
+
+/* ── Cards ── */
+.card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ── Tables ── */
 table, td, th {
     border: 1px solid #aaa;
 }
@@ -19,18 +62,198 @@ table {
 }
 
 th {
-    height: 30px;
+    height: 34px;
+    background-color: rgb(50, 55, 44);
+    color: #fff;
+    padding: 0 8px;
 }
 
 td {
     text-align: center;
-    padding: 5px;
+    padding: 8px 5px;
 }
 
+tr:nth-child(even) {
+    background-color: #f5f5f0;
+}
+
+/* ── Buttons ── */
+.btn {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.88em;
+    cursor: pointer;
+    border: none;
+    font-family: sans-serif;
+}
+
+.btn-primary {
+    background-color: rgb(50, 55, 44);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: rgb(70, 77, 60);
+}
+
+.btn-danger {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #a93226;
+}
+
+.btn-secondary {
+    background-color: #888;
+    color: #fff;
+}
+
+/* ── Legacy form styles (Task Master) ── */
 .form {
     margin-top: 20px;
 }
 
 #content {
     width: 70%;
+}
+
+/* ── New form styles ── */
+.form-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 0.88em;
+    color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.9em;
+    font-family: sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgb(105, 112, 97);
+    box-shadow: 0 0 0 2px rgba(105,112,97,0.3);
+}
+
+.form-error {
+    color: #c0392b;
+    font-size: 0.8em;
+    margin-top: 3px;
+    display: block;
+}
+
+/* ── Category badges ── */
+.badge {
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.badge-strength   { background: #d6eaf8; color: #1a5276; }
+.badge-cardio     { background: #fde8e8; color: #922b21; }
+.badge-flexibility{ background: #d5f5e3; color: #1d6a3a; }
+.badge-sports     { background: #e8daef; color: #6c3483; }
+.badge-other      { background: #eaecee; color: #5d6d7e; }
+
+/* ── Stats grid ── */
+.stats-grid {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 24px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.stat-card h2 {
+    font-size: 2.4em;
+    margin: 0;
+    color: rgb(50, 55, 44);
+}
+
+.stat-card p {
+    color: #666;
+    margin: 6px 0 0;
+    font-size: 0.9em;
+}
+
+/* ── Charts ── */
+.charts-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.chart-container h3 {
+    margin: 0 0 14px;
+    color: #444;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Filter bar ── */
+.filter-bar {
+    padding: 14px 20px;
+}
+
+.filter-bar label {
+    font-size: 0.9em;
+    color: #444;
+}
+
+.filter-bar select {
+    margin-left: 6px;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: sans-serif;
 }
