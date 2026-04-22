@@ -5,11 +5,18 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Welcome</h1>
-    <ul style="font-size: 1.2em; line-height: 2em;">
-        <li><a href="/assignment/">Task Master Project</a></li>
-        <li><a href="/workouts/">Final Project &mdash; Workout Log</a></li>
-    </ul>
+<div class="content" style="margin-top: 60px;">
+    <h1 class="page-title">Welcome</h1>
+    <p style="text-align:center; color:#666; margin-top:-10px; margin-bottom:0; font-size:0.95em;">Choose an app below to get started.</p>
+    <div class="landing-grid">
+        <a href="/assignment/" class="landing-card">
+            <h3>Task Master</h3>
+            <p>Manage your to-do list with full CRUD operations.</p>
+        </a>
+        <a href="/workouts/" class="landing-card">
+            <h3>Workout Log</h3>
+            <p>Track workouts, log sets &amp; reps, and view your progress stats.</p>
+        </a>
+    </div>
 </div>
 {% endblock %}

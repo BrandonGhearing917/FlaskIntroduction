@@ -1,7 +1,348 @@
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
 body, html {
     margin: 0;
-    font-family: sans-serif;
-    background-color: rgb(105, 112, 97);
+    font-family: 'Inter', sans-serif;
+    background: #f0f2ee;
+    color: #222;
+    min-height: 100vh;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: #2c3126;
+    padding: 0 32px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.nav-brand {
+    color: #fff;
+    font-size: 1.15em;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+}
+
+.nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* ── Page wrapper ── */
+.content {
+    margin: 36px auto;
+    width: 440px;
+    max-width: 95vw;
+}
+
+.content.wide {
+    width: 960px;
+    max-width: 95vw;
+}
+
+/* ── Page titles ── */
+.page-title {
+    color: #2c3126;
+    font-size: 1.6em;
+    font-weight: 700;
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+/* ── Cards ── */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #2c3126;
+}
+
+/* ── Landing page cards ── */
+.landing-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.landing-card {
+    flex: 1;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: #222;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.landing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+}
+
+.landing-card .lc-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.landing-card h3 {
+    margin: 0 0 6px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c3126;
+}
+
+.landing-card p {
+    margin: 0;
+    font-size: 0.85em;
+    color: #777;
+}
+
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+th {
+    background: #2c3126;
+    color: #fff;
+    padding: 11px 12px;
+    font-weight: 600;
+    font-size: 0.82em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+th:first-child { border-radius: 0; }
+
+td {
+    text-align: center;
+    padding: 10px 8px;
+    border-bottom: 1px solid #f0f0ec;
+    color: #333;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafaf7; }
+
+/* ── Buttons ── */
+.btn {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.84em;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.15s, opacity 0.15s;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    background: #2c3126;
+    color: #fff;
+}
+
+.btn-primary:hover { background: #3e4636; }
+
+.btn-danger {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.btn-danger:hover { background: #c0392b; }
+
+.btn-secondary {
+    background: #e8e8e4;
+    color: #444;
+}
+
+.btn-secondary:hover { background: #d8d8d3; }
+
+/* ── Legacy Task Master form ── */
+.form { margin-top: 20px; }
+#content { width: 70%; }
+
+/* ── Form styles ── */
+.form-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.82em;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-family: 'Inter', sans-serif;
+    background: #fafaf8;
+    color: #222;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #69705f;
+    box-shadow: 0 0 0 3px rgba(105,112,97,0.15);
+    background: #fff;
+}
+
+.form-error {
+    color: #e74c3c;
+    font-size: 0.78em;
+    margin-top: 4px;
+    display: block;
+}
+
+/* ── Category badges ── */
+.badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.74em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-strength    { background: #dbeafe; color: #1e40af; }
+.badge-cardio      { background: #fee2e2; color: #991b1b; }
+.badge-flexibility { background: #d1fae5; color: #065f46; }
+.badge-sports      { background: #ede9fe; color: #5b21b6; }
+.badge-other       { background: #f1f5f9; color: #475569; }
+
+/* ── Stats grid ── */
+.stats-grid {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 26px 20px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.stat-card h2 {
+    font-size: 2.6em;
+    margin: 0;
+    font-weight: 700;
+    color: #2c3126;
+}
+
+.stat-card p {
+    color: #888;
+    margin: 6px 0 0;
+    font-size: 0.82em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Charts ── */
+.charts-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 22px;
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.chart-container h3 {
+    margin: 0 0 16px;
+    color: #555;
+    font-size: 0.78em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ── Filter bar ── */
+.filter-bar { padding: 14px 20px; }
+
+.filter-bar label {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #555;
+}
+
+.filter-bar select {
+    margin-left: 6px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.88em;
+    font-family: 'Inter', sans-serif;
+    background: #fafaf8;
 }
 
 /* ── Navbar ── */

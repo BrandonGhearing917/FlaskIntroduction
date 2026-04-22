@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align:center; color:#fff; margin-bottom:20px;">Edit Workout</h1>
+    <h1 class="page-title">Edit Workout</h1>
     <div class="card">
         <form method="POST" action="/workouts/update/{{ workout.id }}">
             {{ form.hidden_tag() }}
